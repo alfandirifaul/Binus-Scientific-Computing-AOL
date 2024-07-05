@@ -75,33 +75,6 @@ def plot_data(months, production_data, poly_func, taylor_func, breach_month, sta
 
     plt.tight_layout()
     plt.show()
-
-def month_to_text(month):
-    month = int(month % 12)
-    if month == 1:
-        return "January"
-    elif month == 2:
-        return "February"
-    elif month == 3:
-        return "March"
-    elif month == 4:
-        return "April"
-    elif month == 5:
-        return "May"
-    elif month == 6:
-        return "June"
-    elif month == 7:
-        return "July"
-    elif month == 8:
-        return "August"
-    elif month == 9:
-        return "September"
-    elif month == 10:
-        return "October"
-    elif month == 11:
-        return "November"
-    elif month == 12:
-        return "December"
     
 
 def main():
@@ -126,9 +99,11 @@ def main():
     taylor_func = calculate_taylor_series(poly_func, months, degree)
     breach_month = find_breach_month(poly_func, months, threshold)
     
-    start_building_month = int(breach_month - 13)
-    print("Month when production will exceed 25,000 bags:", breach_month)
-    print("Month to start building a new warehouse:", month_to_text(start_building_month))
+    print(f"Month when production will exceed 25,000 bags: {breach_month:.3f}")
+    
+    # Define the month to start building a new warehouse
+    start_building_month = breach_month - 6
+    print (f"Month to start building a new warehouse: {start_building_month:.3f}")
         
     plot_data(months, production_data, poly_func, taylor_func, breach_month, start_building_month, degree, threshold)
 
